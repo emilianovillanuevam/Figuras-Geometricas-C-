@@ -1,0 +1,143 @@
+#include <iostream>
+using namespace std;
+
+void MenuPrincipal();
+void procesarOpcion(int opcion);
+void dibujarEspacio();
+void dibujarPunto();
+void dibujarLinea(int n);
+void dibujarCuadrado(int lado);
+void dibujarRectangulo(int ancho, int alto);
+void dibujarPiramide(int altura);
+void dibujarPiramideInvertida(int altura);
+
+int main(){
+    int opcion;
+
+    do
+    {
+        MenuPrincipal();
+        cin >> opcion;
+        procesarOpcion(opcion);
+    } while (opcion != 5);
+    
+    return 0;
+}
+
+void dibujarEspacio(){
+    cout << "   "; //Dibuja 3 espacios
+}
+
+void dibujarPunto(){
+    cout << " * "; //Dibuja un punto con espacios a los lados
+}
+
+void dibujarLinea(int n){
+    for (int i = 0; i < n; i++)
+    {
+        dibujarPunto();
+    }
+}
+
+void dibujarCuadrado(int lado){
+    if (lado <= 0) {
+        cout << "Error: El tamano debe ser mayor a 0" << endl;
+        return;
+    }
+    for (int i = 0; i < lado; i++){
+        dibujarLinea(lado);
+        cout << endl;
+    }
+}
+
+void dibujarRectangulo(int ancho, int alto){
+    if (ancho <= 0 || alto <= 0){
+        cout << "Error: Las dimensiones deben ser mayores a 0." << endl;
+        return;
+    }
+    for (int i = 1; i <= alto; i++){
+        dibujarLinea(ancho);
+        cout << endl;
+    }
+}
+
+void dibujarPiramide(int altura){
+    if (altura <=0){
+        cout << "Error: La altura debe ser mayor a 0" << endl;
+        return;
+    }
+    for (int i = 0; i < altura; i++){
+        for (int j = 0; j < altura - 1 - i; j++){
+            dibujarEspacio();
+        }
+        dibujarLinea(2 * i + 1);
+        cout << endl;
+    }
+}
+
+void dibujarPiramideInvertida(int altura){
+    if (altura <= 0){
+        cout << "Error: La altura debe ser mayor a 0." << endl;
+        return;
+    }
+    for (int i = 0; i < altura; i++){
+        for(int j = 0; j < i; j++){
+            dibujarEspacio();
+        }
+    dibujarLinea(2 * (altura - 1 - i) + 1);
+    cout << endl;
+    }
+}
+
+void MenuPrincipal(){
+    cout << "     MENU DE FIGURAS     " << endl;
+    cout << endl;
+    cout << "1: Cuadrado" << endl;
+    cout << "2: Rectangulo" << endl;
+    cout << "3: Piramide" << endl;
+    cout << "4. Piramide invertida" << endl;
+    cout << "5: Salir" << endl;
+    cout << "Elige una opcion: ";
+}
+
+void procesarOpcion(int opcion){
+    int lado, ancho, altura, alto;
+
+    switch (opcion)
+    {
+    case 1:
+        cout << "Ingresa el lado del cuadrado: ";
+        cin >> lado;
+        dibujarCuadrado(lado);
+        cout << endl;
+        break;
+    case 2:
+        cout << "Ingresa el ancho del rectangulo: ";
+        cin >> ancho;
+        cout << "Ingresa el alto del rectangulo: ";
+        cin >> alto;
+        dibujarRectangulo(ancho, alto);
+        cout << endl;
+        break;
+    case 3:
+        cout << "Ingresa la altura de la piramide: ";
+        cin >> altura;
+        dibujarPiramide(altura);
+        cout << endl;
+        break;
+    case 4:
+        cout << "Ingresa la altura de la piramide invertida: ";
+        cin >> altura;
+        dibujarPiramideInvertida(altura);
+        cout << endl;
+        break;
+    case 5:
+        cout << "Saliste del programa" << endl;
+        cout << endl;
+        break;
+    default:
+        cout << "Opcion no valida. Intenta de nuevo." << endl;
+        cout << endl;
+        break;
+    }
+}
